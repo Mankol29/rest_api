@@ -3,7 +3,7 @@ include("dbconnection.php");
 $connsql = dbconnection(); // Zmie? odpowiednio dane dost?powe do bazy danych
 
 if ($connsql->connect_error) {
-    die('B??d po??czenia: ' . $connsql->connect_error);
+    die('Blad polaczenia: ' . $connsql->connect_error);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -27,9 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $createTableSql .= ")";
     
     if ($connsql->query($createTableSql) !== TRUE) {
-        echo 'B??d podczas tworzenia tabeli: ' . $connsql->error;
+        echo 'Blad podczas tworzenia tabeli: ' . $connsql->error;
     } else {
-        echo 'Tabela zosta?a dodana.';
+        echo 'Tabela zostala dodana.';
     }
 }
 
