@@ -13,8 +13,13 @@ if (isset($_POST["table_name"]) && isset($_POST["column_name"]) && isset($_POST[
     $columnName = $_POST["column_name"];
     $columnType = $_POST["column_type"];
 
+    // Je?li column_type to "INT", zamie? na typ INT
+    if ($columnType === "INT") {
+        $columnType = "INT";
+    }
+
     // Wykonanie zapytania do dodania nowej kolumny
-    $sql = "ALTER TABLE $tableName ADD $columnName $columnType";
+    $sql = "ALTER TABLE `$tableName` ADD `$columnName` $columnType";
 
     if ($connsql->query($sql) === TRUE) {
         $response = ["message" => "Column added successfully"];

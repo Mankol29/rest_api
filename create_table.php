@@ -3,7 +3,7 @@ include("dbconnection.php");
 $connsql = dbconnection(); // Zmie? odpowiednio dane dost?powe do bazy danych
 
 if ($connsql->connect_error) {
-    die('Blad polaczenia: ' . $connsql->connect_error);
+    die('B??d po??czenia: ' . $connsql->connect_error);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -13,6 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Tworzenie zapytania SQL do tworzenia tabeli
     $createTableSql = "CREATE TABLE IF NOT EXISTS `$tableName` (";
     
+    // Dodawanie kolumny id jako integer z automatycznie generowanym kluczem g?ównym
+    $createTableSql .= "id INT AUTO_INCREMENT PRIMARY KEY,";
+
     for ($i = 0; $i < $columnCount; $i++) {
         $columnName = $_POST["column_name_$i"];
         $columnType = $_POST["column_type_$i"];
@@ -27,9 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $createTableSql .= ")";
     
     if ($connsql->query($createTableSql) !== TRUE) {
-        echo 'Blad podczas tworzenia tabeli: ' . $connsql->error;
+        echo 'B??d podczas tworzenia tabeli: ' . $connsql->error;
     } else {
-        echo 'Tabela zostala dodana.';
+        echo 'Tabela zosta?a dodana.';
     }
 }
 
